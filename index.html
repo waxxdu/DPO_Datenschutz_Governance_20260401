@@ -414,8 +414,13 @@
 
     <footer class="footer"><div class="container"><p>&copy; 2026 Carsten Wittmann · CV-Präsentation für Datenschutz-Governance-Projekt</p></div></footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         const nav=document.getElementById('nav');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>50)});
         const toggle=document.getElementById('navToggle'),links=document.getElementById('navLinks');toggle.addEventListener('click',()=>{links.classList.toggle('active')});links.querySelectorAll('a').forEach(l=>{l.addEventListener('click',()=>{links.classList.remove('active')})});
         document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){const o=80,p=t.getBoundingClientRect().top+window.pageYOffset-o;window.scrollTo({top:p,behavior:'smooth'})}})});
-        const animateValue=(el,end)=>{const d=1500,s=performance.now(),tick=n=>{const e=n-s,p=Math.min(e/d,1),v=1-Math.pow(1-p,3);el.textContent=Math.floor(v*end);p<1?requestAnimationFrame(tick):el.textContent=end};requestAnima
+        const animateValue=(el,end)=>{const d=1500,s=performance.now(),tick=n=>{const e=n-s,p=Math.min(e/d,1),v=1-Math.pow(1-p,3);el.textContent=Math.floor(v*end);p<1?requestAnimationFrame(tick):el.textContent=end};requestAnimationFrame(tick)};
+        const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){const el=en.target,c=parseInt(el.dataset.count)||0;animateValue(el,c);obs.unobserve(el)}})},{threshold:0.5});
+        document.querySelectorAll('[data-count]').forEach(el=>obs.observe(el));
+    </script>
+</body>
+</html>
